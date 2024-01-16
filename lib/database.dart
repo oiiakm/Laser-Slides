@@ -7,6 +7,7 @@ import 'package:path/path.dart';
 class DatabaseHelper {
   late Database _database;
 
+//open database
   Future<void> open() async {
     final databasePath = await getDatabasesPath();
     final path = join(databasePath, 'myDb.db');
@@ -20,6 +21,7 @@ class DatabaseHelper {
     );
   }
 
+//create tables
   void _createTables(Database db) {
     db.execute('''
       CREATE TABLE IF NOT EXISTS button_config(
@@ -42,7 +44,7 @@ class DatabaseHelper {
     ''');
   }
 
-//network operations
+//get all network data
   Future<Map<String, dynamic>> getAllNetworkData() async {
     await open();
     final List<Map<String, dynamic>> networkData =
@@ -52,6 +54,7 @@ class DatabaseHelper {
     };
   }
 
+//update network data
   Future<int> updateNetworkData(int id, NetworkModel networkModel) async {
     await open();
     return await _database.update(
@@ -62,6 +65,7 @@ class DatabaseHelper {
     );
   }
 
+//insert network data
   Future<int> insertNetworkData(NetworkModel networkModel) async {
     return await _database.rawInsert(
       'INSERT OR REPLACE INTO network_config (id, outgoingIpAddress, outgoingPort, startPath, incomingPort, incomingIpAddress, listenForIncomingMessages) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -77,9 +81,9 @@ class DatabaseHelper {
     );
   }
 
+//create network data
   Future<void> createNetwokData() async {
     await open();
-
     String ipv4Address = await NetworkViewModel().deviceIPV4();
     final newNetworkData = NetworkModel(
         id: 1,
@@ -93,7 +97,7 @@ class DatabaseHelper {
     await insertNetworkData(newNetworkData);
   }
 
-//button operations
+//get all button data
   Future<Map<String, dynamic>> getAllButtonData() async {
     await open();
     final List<Map<String, dynamic>> buttonData =
@@ -103,6 +107,7 @@ class DatabaseHelper {
     };
   }
 
+//update button data
   Future<int> updateButton(int id, ButtonModel updatedButton) async {
     await open();
     return await _database.update(
@@ -113,6 +118,7 @@ class DatabaseHelper {
     );
   }
 
+//insert button data
   Future<int> insertButton(ButtonModel button) async {
     return await _database.rawInsert(
       'INSERT OR REPLACE INTO button_config (id, buttonName, buttonPressed) VALUES (?, ?, ?)',
@@ -120,9 +126,10 @@ class DatabaseHelper {
     );
   }
 
+//create button data
   Future<void> createButton() async {
     await open();
-    for (int i = 1; i <= 15; i++) {
+    for (int i = 1; i <= 18; i++) {
       final newButton = ButtonModel(
           id: i,
           buttonName: 'Button $i',

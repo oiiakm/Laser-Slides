@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   final String labelText;
@@ -18,8 +19,10 @@ class CustomTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = Get.width;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
+      width: screenWidth / 3.5,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.0),
@@ -40,7 +43,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           hintText: hintText,
           border: InputBorder.none,
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
         ),
         initialValue: initialValue,
       ),

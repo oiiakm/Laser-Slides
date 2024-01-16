@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:laser_slides/database.dart';
 import 'package:laser_slides/models/network_model.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
-class NetworkViewModel extends GetxController {
+class NetworkViewModel extends GetxController with GetTickerProviderStateMixin {
   final RxString outgoingIpAddress = ''.obs;
   final RxString outgoingPort = ''.obs;
   final RxString startPath = '/'.obs;
@@ -11,6 +13,7 @@ class NetworkViewModel extends GetxController {
   final RxString incomingPort = ''.obs;
   final RxInt listenForIncomingMessages = 1.obs;
 
+// fetches the network data
   Future<Map<String, dynamic>> fetchData() async {
     try {
       final snapshot = await DatabaseHelper().getAllNetworkData();
@@ -29,6 +32,7 @@ class NetworkViewModel extends GetxController {
     }
   }
 
+// for updating the network data
   Future<void> updateData() async {
     try {
       final updatedNetworkData = NetworkModel(
@@ -47,6 +51,7 @@ class NetworkViewModel extends GetxController {
     }
   }
 
+// for getting the device's IP address
   Future<String> deviceIPV4() async {
     try {
       for (var interface in await NetworkInterface.list()) {
@@ -60,5 +65,54 @@ class NetworkViewModel extends GetxController {
       print('Error: $e');
     }
     return 'waiting...';
+  }
+
+  late AnimationController controller;
+  late Animation<double> animation;
+  late AnimationController wifiAnimationController;
+  late Animation<double> wifiAnimation;
+  @override
+  void onInit() {
+    super.onInit();
+    controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    )..repeat(reverse: true);
+    animation = Tween<double>(begin: 0, end: 1).animate(controller);
+
+    wifiAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    )..repeat(reverse: true);
+    wifiAnimation = Tween<double>(begin: -60, end: 70).animate(
+      CurvedAnimation(
+        parent: wifiAnimationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _checkWifiStatus();
+
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      _updateWifiStatus(result);
+    });
+  }
+
+  @override
+  void onClose() {
+    controller.dispose();
+    wifiAnimationController.dispose();
+    super.onClose();
+  }
+
+  late RxBool isWifiConnected = false.obs;
+
+  Future<void> _checkWifiStatus() async {
+    ConnectivityResult result = await Connectivity().checkConnectivity();
+    _updateWifiStatus(result);
+  }
+
+  void _updateWifiStatus(ConnectivityResult result) {
+    isWifiConnected.value = (result == ConnectivityResult.wifi);
   }
 }

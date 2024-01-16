@@ -21,9 +21,9 @@ class HelpView extends StatelessWidget {
               _sectionHeader('Usage Instructions:'),
               _point('Find the IP in BEYOND\'s OSC settings.'),
               _point('Input the IP in LaserSlides\' "network" button.'),
-              _point('Activate "edit mode" to customize buttons.'),
+              _point('Swipe Up to edit the buttons.'),
               _sectionHeader('Editing Buttons:'),
-              _point('Edit "button 1" by adding a name to the label.'),
+              _point('Edit "button 1" by adding a name to the button name.'),
               _point(
                   'Specify the BEYOND PATH for the image in the button pressed field.'),
               _sectionHeader('Understanding BEYOND PATH:'),

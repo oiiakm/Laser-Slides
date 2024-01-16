@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:laser_slides/views/cue_commands_view.dart';
+import 'package:laser_slides/views/setting_view.dart';
+import 'package:laser_slides/views/dashboard_view.dart';
+import 'package:laser_slides/views/help_view.dart';
+import 'package:laser_slides/views/network_view.dart';
+
+class NavigationViewModel extends GetxController {
+  var currentView = Rx<Widget>(DashboardView());
+  var selectedIcon = RxInt(0);
+
+  void changeView(int index) {
+    switch (index) {
+      case 0:
+        _changeView(DashboardView(), 0);
+        break;
+      case 1:
+        _changeView(NetworkView(), 1);
+        break;
+      case 2:
+        _changeView(SettingView(), 2);
+        break;
+      case 3:
+        _changeView(HelpView(), 3);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  void _changeView(Widget view, int index) {
+    currentView.value = view;
+    selectedIcon.value = index;
+  }
+}

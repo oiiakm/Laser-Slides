@@ -14,11 +14,27 @@ class NetworkView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/network.jpg',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+          Positioned.fill(
+            child: AnimatedBuilder(
+              animation: _viewModel.animation,
+              builder: (context, child) {
+                return Container(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      center: Alignment.center,
+                      radius: _viewModel.animation.value * 2,
+                      colors: [
+                        Colors.transparent,
+                        Colors.blue.withOpacity(_viewModel.animation.value),
+                        Colors.red.withOpacity(_viewModel.animation.value),
+                        Colors.transparent,
+                      ],
+                      stops: const [0.0, 0.4, 0.6, 1.0],
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
           FutureBuilder<Map<String, dynamic>>(
             future: _viewModel.fetchData(),
@@ -42,7 +58,7 @@ class NetworkView extends StatelessWidget {
                     width: ResponsiveUtils.calculateNetworkContainerWidth(),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(183, 171, 230, 206),
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: SingleChildScrollView(
                       child: Padding(
@@ -123,26 +139,28 @@ class NetworkView extends StatelessWidget {
                               onChanged: (value) =>
                                   _viewModel.incomingPort.value = value,
                             ),
-                            const SizedBox(height: 16.0),
+                            const SizedBox(height: 40.0),
                             Center(
                                 child: ElevatedButton(
                               onPressed: () async {
                                 await _viewModel.updateData();
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
+                                backgroundColor:
+                                    const Color.fromARGB(255, 76, 63, 63)
+                                        .withOpacity(0.9),
                                 elevation: 5.0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 16.0, horizontal: 24.0),
+                                    vertical: 20.0, horizontal: 60.0),
                               ),
                               child: const Text(
                                 'Save',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16.0,
+                                  fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -153,6 +171,35 @@ class NetworkView extends StatelessWidget {
                     ),
                   ),
                 ),
+              );
+            },
+          ),
+          GetBuilder<NetworkViewModel>(
+            builder: (controller) {
+              Color backgroundColor =
+                  controller.isWifiConnected.value ? Colors.green : Colors.red;
+              Color textColor = controller.isWifiConnected.value
+                  ? Colors.white
+                  : Colors.black;
+
+              return AnimatedBuilder(
+                animation: _viewModel.wifiAnimationController,
+                builder: (context, child) {
+                  return Positioned(
+                    top: 200 - _viewModel.wifiAnimation.value,
+                    right: 50 - _viewModel.wifiAnimation.value,
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Center(
+                          child: Icon(Icons.wifi, color: textColor, size: 50)),
+                    ),
+                  );
+                },
               );
             },
           ),
