@@ -251,6 +251,4 @@ class CommandsViewModel extends GetxController {
       },
     );
   }
-
-
 }

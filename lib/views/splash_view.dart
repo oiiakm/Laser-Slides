@@ -12,7 +12,7 @@ class SplashView extends StatelessWidget {
     backgroundController.startAnimations();
 
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(milliseconds: 2500),
       () {
         Get.offNamed('/navigation_view');
       },

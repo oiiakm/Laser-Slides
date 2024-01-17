@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomMasterCommandsButtonWidget extends StatelessWidget {
   final int? buttonId;
   final String buttonName;
   final String? path;
@@ -9,7 +8,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final VoidCallback onEditPressed;
 
-  const CustomButton({
+  const CustomMasterCommandsButtonWidget({
     Key? key,
     this.buttonId,
     required this.buttonName,

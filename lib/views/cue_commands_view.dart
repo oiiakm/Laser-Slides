@@ -24,7 +24,7 @@ class CueCommandsView extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned.fill(
-                  child: _buildBackground(),
+                  child: _buildBackground(context),
                 ),
                 Positioned(
                   bottom: constraints.maxHeight * 0.09,
@@ -44,7 +44,7 @@ class CueCommandsView extends StatelessWidget {
     );
   }
 
-  Widget _buildBackground() {
+  Widget _buildBackground(context) {
     return ShaderMask(
       blendMode: BlendMode.srcATop,
       shaderCallback: (Rect bounds) {
@@ -145,6 +145,22 @@ class CueCommandsView extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(80.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                onPressed: () {
+                  _cueCommandsViewModel.showCommandDialogue();
+                },
+                icon: const Icon(
+                  Icons.edit_square,
+                  color: Colors.white,
+                  size: 40,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

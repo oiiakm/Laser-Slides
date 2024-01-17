@@ -40,12 +40,22 @@ class CustomTextFieldWidget extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           labelText: labelText,
+          labelStyle: const TextStyle(
+            color: Colors.blue,
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
           hintText: hintText,
           border: InputBorder.none,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
         ),
         initialValue: initialValue,
+        style: const TextStyle(
+          color: Colors.black,
+          fontSize: 16.0,
+          fontWeight: FontWeight.normal,
+        ),
       ),
     );
   }

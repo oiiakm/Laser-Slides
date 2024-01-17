@@ -17,10 +17,12 @@ class CustomCueButtonWidget extends StatelessWidget {
           width: 80,
           height: 80,
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               controller.setCurrentIndices(indices);
               print('Button pressed at index: $indices');
-              _cueCommandsViewModel.callOsc('beyond/general/startcue', indices);
+              String savedCommand = await  _cueCommandsViewModel.getSavedCommand();
+              _cueCommandsViewModel.callOsc(
+                  savedCommand, indices);
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,

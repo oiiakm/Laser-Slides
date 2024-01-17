@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:laser_slides/viewmodel/navigation_view_model.dart';
-import 'package:laser_slides/views/navigation_view.dart';
 
 class CustomNavigationWidget extends StatelessWidget {
   final int index;
@@ -10,6 +9,7 @@ class CustomNavigationWidget extends StatelessWidget {
   final Color color;
 
   const CustomNavigationWidget({
+    super.key,
     required this.index,
     required this.icon,
     required this.onTap,
@@ -39,13 +39,13 @@ class CustomNavigationWidget extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Colors.green.withOpacity(0.7),
-                  offset: Offset(-3, -3),
+                  offset: const Offset(-3, -3),
                   blurRadius: 5,
                   spreadRadius: 2,
                 ),
                 BoxShadow(
                   color: Colors.teal.withOpacity(0.7),
-                  offset: Offset(-3, -3),
+                  offset: const Offset(-3, -3),
                   blurRadius: 5,
                   spreadRadius: 2,
                 ),

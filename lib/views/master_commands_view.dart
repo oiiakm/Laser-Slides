@@ -88,7 +88,7 @@ class MasterCommandsView extends StatelessWidget {
   }
 
   Widget _buildCustomButton(ButtonModel button) {
-    return CustomButton(
+    return CustomMasterCommandsButtonWidget(
       buttonName: button.buttonName,
       buttonId: button.id,
       path: button.buttonPressed,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:laser_slides/utils/app_tour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingView extends StatefulWidget {
@@ -126,7 +127,7 @@ class _SettingViewState extends State<SettingView> {
                 const SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: () {
-                    // Get.to(AppTour());
+                    Get.to(AppTour());
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: const Color.fromARGB(255, 215, 48, 23),
