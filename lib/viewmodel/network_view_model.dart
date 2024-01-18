@@ -106,12 +106,13 @@ class NetworkViewModel extends GetxController with GetTickerProviderStateMixin {
   }
 
   late RxBool isWifiConnected = false.obs;
-
+//to check wifi status
   Future<void> _checkWifiStatus() async {
     ConnectivityResult result = await Connectivity().checkConnectivity();
     _updateWifiStatus(result);
   }
 
+//to update wifi status
   void _updateWifiStatus(ConnectivityResult result) {
     isWifiConnected.value = (result == ConnectivityResult.wifi);
   }

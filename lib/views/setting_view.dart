@@ -27,6 +27,7 @@ class _SettingViewState extends State<SettingView> {
     });
   }
 
+//apply theme
   _applyTheme(int index) {
     switch (index) {
       case 0:
@@ -43,6 +44,7 @@ class _SettingViewState extends State<SettingView> {
     }
   }
 
+//save selected theme
   _saveSelectedTheme(int index) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('themeIndex', index);
@@ -152,6 +154,7 @@ class _SettingViewState extends State<SettingView> {
     );
   }
 
+//get theme name
   String _getThemeName(int index) {
     switch (index) {
       case 0:

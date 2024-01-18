@@ -9,6 +9,7 @@ class NavigationViewModel extends GetxController {
   var currentView = Rx<Widget>(DashboardView());
   var selectedIcon = RxInt(0);
 
+  // Change view based on the selected index
   void changeView(int index) {
     switch (index) {
       case 0:
@@ -29,6 +30,7 @@ class NavigationViewModel extends GetxController {
     }
   }
 
+  // method to update the current view and selected icon
   void _changeView(Widget view, int index) {
     currentView.value = view;
     selectedIcon.value = index;

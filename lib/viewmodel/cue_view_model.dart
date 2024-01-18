@@ -13,6 +13,7 @@ class CueCommandsViewModel extends GetxController
   RxList<int> currentIndices = <int>[0, 0].obs;
   Direction currentDirection = Direction.none;
 
+  // Set current indices based on input string
   void setCurrentIndices(String indices) {
     final List<int> parsedIndices = parseIndices(indices);
     currentIndices.assignAll(parsedIndices);
@@ -20,6 +21,7 @@ class CueCommandsViewModel extends GetxController
     update();
   }
 
+  // function to adjust current indices based on direction
   Future<void> move(Direction direction) async {
     String savedCommand = await getSavedCommand();
     currentDirection = direction;
@@ -64,6 +66,7 @@ class CueCommandsViewModel extends GetxController
     update();
   }
 
+  // Parse indices from string to List<int>
   List<int> parseIndices(String indices) {
     final List<String> parts = indices.split(', ');
     return [
@@ -72,16 +75,20 @@ class CueCommandsViewModel extends GetxController
     ];
   }
 
+  // Animation controllers and variables
   late AnimationController animationController;
   late AnimationController blastController;
   late Animation<double> blastAnimation;
+
   @override
   void onInit() {
+    //animation controller for background
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
 
+    //animation controller while cue view starts
     blastController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
@@ -106,6 +113,7 @@ class CueCommandsViewModel extends GetxController
     super.onClose();
   }
 
+  //call OSC command using network data
   Future<void> callOsc(command, arguments) async {
     Map<String, dynamic> networkData = await _networkViewModel.fetchData();
 
@@ -118,6 +126,7 @@ class CueCommandsViewModel extends GetxController
     );
   }
 
+  //dialog to update command
   Future<void> showCommandDialogue() async {
     final TextEditingController newController = TextEditingController();
     final TextEditingController oldController = TextEditingController();
@@ -276,11 +285,13 @@ class CueCommandsViewModel extends GetxController
     );
   }
 
+  // Update saved command in SharedPreferences
   Future<void> updateCueCommand(String command) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('newCommand', command);
   }
 
+  // Retrieve saved command from SharedPreferences
   Future<String> getSavedCommand() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('newCommand') ?? 'beyond/general/cuedown';

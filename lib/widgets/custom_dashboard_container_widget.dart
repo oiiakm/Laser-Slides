@@ -9,6 +9,7 @@ class CustomDashboardContainerWidget extends StatefulWidget {
   final VoidCallback? onTap;
 
   const CustomDashboardContainerWidget({
+    super.key,
     required this.text,
     required this.imageUrl,
     this.borderColor = Colors.blue,
@@ -18,7 +19,7 @@ class CustomDashboardContainerWidget extends StatefulWidget {
   });
 
   @override
-  _CustomDashboardContainerWidgetState createState() =>
+  State<CustomDashboardContainerWidget> createState() =>
       _CustomDashboardContainerWidgetState();
 }
 
@@ -71,7 +72,7 @@ class _CustomDashboardContainerWidgetState
             builder: (context, child) {
               return Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0), // Add proper padding here
+                  padding: const EdgeInsets.all(8.0),
                   child: Transform.scale(
                     scale: _scaleAnimation.value,
                     child: Opacity(

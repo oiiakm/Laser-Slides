@@ -1,7 +1,4 @@
-
-
-
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class CustomCircleWidget extends StatelessWidget {
   final double size;

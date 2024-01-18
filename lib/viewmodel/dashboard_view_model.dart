@@ -60,11 +60,11 @@ class DashboardViewModel extends GetxController
   @override
   void onInit() {
     super.onInit();
-
     currentEmoji = _getRandomEmoji();
     greetingMessage = ''.obs;
     typingText = ''.obs;
 
+// for animation
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
@@ -88,20 +88,16 @@ class DashboardViewModel extends GetxController
     });
 
     typingTimer = Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
-      if (currentTextIndex < greetingMessage.value.length) {
-        typingText.value =
-            greetingMessage.value.substring(0, currentTextIndex + 1);
-        currentTextIndex++;
-      } else {
-        currentTextIndex = 0;
-      }
+      _updateTypingAnimation();
     });
   }
 
+  // Get a random emoji from the list
   String _getRandomEmoji() {
     return emojis[DateTime.now().second % emojis.length];
   }
 
+  // Update the greeting message based on the current hour
   void _updateGreetingMessage() {
     var hour = DateTime.now().hour;
 
@@ -114,6 +110,7 @@ class DashboardViewModel extends GetxController
     }
   }
 
+  // Get a random curve for animation
   Curve getRandomCurve() {
     List<Curve> curves = [
       Curves.elasticOut,
@@ -121,6 +118,17 @@ class DashboardViewModel extends GetxController
       Curves.bounceOut,
     ];
     return curves[Random().nextInt(curves.length)];
+  }
+
+  // Update typing animation
+  void _updateTypingAnimation() {
+    if (currentTextIndex < greetingMessage.value.length) {
+      typingText.value =
+          greetingMessage.value.substring(0, currentTextIndex + 1);
+      currentTextIndex++;
+    } else {
+      currentTextIndex = 0;
+    }
   }
 
   @override

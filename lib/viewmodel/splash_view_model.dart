@@ -43,6 +43,7 @@ class SplashViewModel extends GetxController with GetTickerProviderStateMixin {
     super.onClose();
   }
 
+//to start animation
   void startAnimations() {
     _animationController.repeat(reverse: true);
     _laserAnimationController.repeat(
@@ -58,6 +59,7 @@ class SplashViewModel extends GetxController with GetTickerProviderStateMixin {
     });
   }
 
+// generate random position for laser
   Offset _randomLaserPosition() {
     return Offset(
       Random().nextDouble() * Get.width,
@@ -65,6 +67,7 @@ class SplashViewModel extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
+//generate random color for laser
   Color _randomLaserColor() {
     return Color.fromRGBO(
       Random().nextInt(256),

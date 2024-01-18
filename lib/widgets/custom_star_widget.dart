@@ -30,7 +30,7 @@ class StarPainter extends CustomPainter {
     final double centerX = size.width / 2;
     final double centerY = size.height / 2;
 
-    final double angle = pi / 5; // Angle between star points
+    const double angle = pi / 5;
 
     final Path path = Path();
 
