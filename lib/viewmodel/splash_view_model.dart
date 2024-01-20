@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashViewModel extends GetxController with GetTickerProviderStateMixin {
-  late AnimationController _animationController;
+  late AnimationController _animationController;//for main splash screen
   late AnimationController _laserAnimationController;
   late AnimationController textAnimationController;
   late List<Offset> laserPositions;

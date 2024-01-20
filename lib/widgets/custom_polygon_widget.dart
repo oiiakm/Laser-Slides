@@ -35,6 +35,10 @@ class CirclePainter extends CustomPainter {
     );
   }
 
+
+// Indicates whether the painting logic needs to be repainted.
+// In this case, it always returns false, 
+// implying that the painting does not depend on any external changes and does not need to be repainted.
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;

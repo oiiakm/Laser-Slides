@@ -26,6 +26,16 @@ class CommandsViewModel extends GetxController {
     }
   }
 
+// final buttonList = (data['button_config'] as List).map((map) => ButtonModel.fromMap(map)).toList();:
+// This line extracts the 'button_config' key from the data map, assuming it contains a list.
+// It then maps each item in the list to a ButtonModel by using the fromMap constructor and converts it to a list.
+// The resulting list is stored in the variable buttonList.
+
+// buttons.assignAll(buttonList);:
+//  This line assigns the list of ButtonModel objects to a variable named buttons.
+//  The use of assignAll suggests that buttons is likely an observable or reactive
+//  list that triggers updates when its content changes.
+
 //returning the argument and command
   List<Object> getArgumentAndCommand(String input) {
     List<String> parts = input.trim().split(' ');
@@ -44,6 +54,7 @@ class CommandsViewModel extends GetxController {
 
 // calling OSC command and passing the OSC parameters
   void getOSCParameters(ButtonModel button) async {
+    // we can use dynamic also in case of List<Object>
     List<Object> result = getArgumentAndCommand(button.buttonPressed);
 
     String command = result.isNotEmpty ? result[0] as String : '';
@@ -88,7 +99,7 @@ class CommandsViewModel extends GetxController {
       print('Arguments sent: $arguments');
       final oscMessage =
           OSCMessage(startPath + command, arguments: arguments.cast<Object>());
-
+//bind to any ipv4 address and a random port numberfor the host
       final socket = await RawDatagramSocket.bind(InternetAddress.anyIPv4, 0);
 
       final oscBytes = oscMessage.toBytes();

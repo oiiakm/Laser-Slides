@@ -21,6 +21,15 @@ class CueCommandsViewModel extends GetxController
     update();
   }
 
+  // Parse indices from string to List<int>
+  List<int> parseIndices(String indices) {
+    final List<String> parts = indices.split(', ');
+    return [
+      int.parse(parts[0].substring(1)),
+      int.parse(parts[1].substring(0, parts[1].length - 1))
+    ];
+  }
+  
   // function to adjust current indices based on direction
   Future<void> move(Direction direction) async {
     String savedCommand = await getSavedCommand();
@@ -66,14 +75,7 @@ class CueCommandsViewModel extends GetxController
     update();
   }
 
-  // Parse indices from string to List<int>
-  List<int> parseIndices(String indices) {
-    final List<String> parts = indices.split(', ');
-    return [
-      int.parse(parts[0].substring(1)),
-      int.parse(parts[1].substring(0, parts[1].length - 1))
-    ];
-  }
+
 
   // Animation controllers and variables
   late AnimationController animationController;
