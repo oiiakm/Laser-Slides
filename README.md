@@ -45,7 +45,7 @@
 </ul>
 <p>If you have questions or need assistance, please feel free to reach out! 😊</p>
 <h3>Documentation</h3>
-<p>For more information, please check the complete documentation on the project's <a href="https://github.com/oiiakm/Laser-Slides/wiki">wiki</a>.</p>
+<p>For more information, please check the complete documentation on the project's <a href="https://github.com/oiiakm/Laser-Slides/wiki/Introduction">wiki</a>.</p>
 <h2>License</h2>
 <p>This project is licensed under the <a href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 <p>
